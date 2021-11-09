@@ -35,7 +35,7 @@ function getFinals(data) {
    const allFinals = data.filter(item => item.Stage === 'Final')
    return allFinals;
 }
-console.log('Task 2', getFinals(fifaData));
+// console.log('Task 2', getFinals(fifaData));
 
 
 
@@ -45,13 +45,13 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function getFinals from task 2 
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(array,callback) {
-     const years = callback(array).map(item => item.Year)
+function getYears(array,cb) {
+     const years = cb(array).map(item => item.Year)
      return years;
     
 }
 
-console.log('Task 3', getYears(fifaData, getFinals));
+// console.log('Task 3', getYears(fifaData, getFinals));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -64,10 +64,10 @@ Use the higher-order function getWinners to do the following:
 // use a condition if else
 function getWinners(array ,callback) {
     
-    const winners = callback(array).map(item => item['Home Team Goals'] > item['Away Team Goals']? item['Home Team Name']: item['Away Team Name'])
+    const winners = callback(array).map(item => item['Home Team Goals'] > item['Away Team Goals'] ? item['Home Team Name']: item['Away Team Name'])
     return winners;
 }
-console.log('Task 4',getWinners(fifaData, getFinals))
+// console.log('Task 4',getWinners(fifaData, getFinals))
 
 
 
@@ -81,10 +81,18 @@ Use the higher-order function getWinnersByYear to do the following:
 
 hint: the strings returned need to exactly match the string in step 4.
  */
-// 4 parameters - array ,getfinalcb, getYearcb, getWinner
-function getWinnersByYear(/* code here */) {
-    /* code here */
+
+function getWinnersByYear(array , getYears, getWinners) {
+
+    const years = getYears()
+    const countries = getWinners()
+return years.map((year ,i ) => [year , countries[i]]).map(([year,country]) => `In ${year}, ${country} won the world cup!`)
+// const yearAndCountries = yearAndWinner.map(([year,country]) => `In ${year}, ${country} won the world cup!`)
+// return yearAndCountries;
 }
+
+
+
 
 
 

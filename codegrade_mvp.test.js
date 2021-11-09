@@ -483,7 +483,7 @@ describe('getWinners', ()=>{
 // Task 5
 
 describe('getWinnersByYear', ()=>{
-    it('an array containing strings of winners', ()=>{
+    it.only('an array containing strings of winners', ()=>{
         expect(functions.getWinnersByYear(fifaData, getYears, getWinners)).toEqual(expect.arrayContaining(
             [
                 'In 1930, Uruguay won the world cup!',
