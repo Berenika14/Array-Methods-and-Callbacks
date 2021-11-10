@@ -112,24 +112,51 @@ function getAverageGoals(callback) {
    
     
 }
-console.log(getAverageGoals(getFinals(fifaData)));
+//console.log(getAverageGoals(getFinals(fifaData)));
 
 
 
 /// 🥅 STRETCH 🥅 ///
 
 /* 💪💪💪💪💪 Stretch 1: 💪💪💪💪💪 
-Create a function called `getCountryWins` that takes the parameters `data` and `team initials` and returns the number of world cup wins that country has had. 
+// Create a function called `getCountryWins` that takes the parameters `data` and 
+// `team initials` and returns the number of world cup wins that country has had. 
 
 Hint: Investigate your data to find "team initials"!
-Hint: use `.reduce` */
+Hint: use `.reduce` 
+*/
+function getCountryWins(array, initials) {
+    
+    const winnerCountries = fifaData.filter((item ) => item.Stage === 'Final');
+    // console.log( winnerCountries.filter(i => i["Home Team Initials"] === "ITA" || i["Away Team Initials"] === "ITA"))
+    return winnerCountries.reduce((count, matchInfo) => {
+        const homeTeam = { score: matchInfo["Home Team Goals"], initials: matchInfo["Home Team Initials"]}
+        const awayTeam = { score: matchInfo["Away Team Goals"], initials: matchInfo["Away Team Initials"]}
+        if (homeTeam.initials === initials && homeTeam.score > awayTeam.score) {
+            return count + 1;
+        } else if (awayTeam.initials === initials && awayTeam.score > homeTeam.score) {
+            return count + 1;
+        } else if (homeTeam.score === awayTeam.score) {
+            const name = homeTeam.initials === initials ? matchInfo['Home Team Name'] : matchInfo['Away Team Name'];
+            return count + (matchInfo["Win conditions"].startsWith(`${name} win`) ? 1 : 0)
 
-function getCountryWins(/* code here */) {
-
-    /* code here */
+        }
+        return count;
+    }, 0)
+    // const initialsOfWinners = winnerCountries.map((item) =>  item['Home Team Goals'] > item["Away Team Goals"] ? item['Home Team Initials']: item['Away Team Initials'] )
+    // return initialsOfWinners
+    // .filter(winnerInitials => winnerInitials === initials)
+    // .reduce((count) => count + 1, 0)
+    // return initialsOfWinners.reduce((winnerCountsByCountryInitials, initials) => {
+    //     const numberOfWins = winnerCountsByCountryInitials[initials]
+    //     const incrementedWins = typeof numberOfWins === "number" ? numberOfWins + 1 : 1;
+    //     winnerCountsByCountryInitials[initials] = incrementedWins;
+    //     return winnerCountsByCountryInitials;
+    // }, { /* [brazil initials]: # of wins, [england initials]: number of wins */})
+//   console.log(getInitials);
 
 }
-
+console.log(getCountryWins(fifaData,'ENG'))
 
 
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 

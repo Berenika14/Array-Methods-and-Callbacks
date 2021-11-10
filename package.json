@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon -x \"clear;node\" index.js",
    "test": "jest --watchAll --verbose --forceExit --silent"
   },
   "repository": {
