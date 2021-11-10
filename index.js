@@ -93,9 +93,6 @@ return years.map((year ,i ) => [year , countries[i]]).map(([year,country]) => `I
 
 
 
-
-
-
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function getAverageGoals to do the following: 
  1. Receive the callback function getFinals from task 2 ensure you pass in the data as an argument
@@ -106,10 +103,16 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(callback) {
+   const AverageGoals = callback.reduce((last_value,current_value) => 
+    last_value + current_value['Home Team Goals'] + current_value['Away Team Goals'] 
+    ,0
+   );
+   return (AverageGoals/callback.length).toFixed(2);
+   
+    
 }
-
+console.log(getAverageGoals(getFinals(fifaData)));
 
 
 
